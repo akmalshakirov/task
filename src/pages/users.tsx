@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import type { UserType } from "../types/userType";
+import Table from "../components/table";
+import { TableColumns } from "../data/sidebarData";
 
 const Users = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -27,15 +29,7 @@ const Users = () => {
         return <>Loading...</>;
     }
 
-    return (
-        <div>
-            {data?.map((u) => (
-                <div key={u.id}>
-                    <p>{u.firstName}</p>
-                </div>
-            ))}
-        </div>
-    );
+    return <Table data={data} columns={TableColumns} />;
 };
 
 export default Users;

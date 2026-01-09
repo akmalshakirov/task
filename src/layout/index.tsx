@@ -1,5 +1,4 @@
 import type React from "react";
-import { Outlet } from "react-router-dom";
 import Header from "../components/header/header";
 import Sidebar from "../components/sidebar/sidebar";
 
@@ -13,7 +12,7 @@ const Layout = ({ children }: Props) => {
             <Sidebar />
             <div className='flex flex-col w-full'>
                 <Header />
-                <main className='p-5'>{children ? children : <Outlet />}</main>
+                <div className='p-5'>{children}</div>
             </div>
         </main>
     );

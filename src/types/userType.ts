@@ -8,3 +8,8 @@ export type UserType = {
     username: string;
     role: string;
 };
+
+export type TableColumns = {
+    key: string;
+    header: string;
+};

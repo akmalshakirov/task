@@ -19,3 +19,34 @@ export const SidebarData = [
     //     link: "/edit",
     // },
 ];
+
+export const TableColumns = [
+    {
+        key: "username",
+        header: "Username",
+    },
+    {
+        key: "firstName",
+        header: "First name",
+    },
+    {
+        key: "lastName",
+        header: "Last name",
+    },
+    {
+        key: "gender",
+        header: "Gender",
+    },
+    {
+        key: "phone",
+        header: "Phone",
+    },
+    {
+        key: "email",
+        header: "Email",
+    },
+    {
+        key: "role",
+        header: "Role",
+    },
+];
