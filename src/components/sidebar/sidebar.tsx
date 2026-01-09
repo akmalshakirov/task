@@ -3,7 +3,7 @@ import { SidebarData } from "../../data/sidebarData";
 
 const Sidebar = () => {
     return (
-        <aside className='h-screen bg-primary max-w-[25vw] lg:max-w-[20vw] w-full p-5 hidden md:block'>
+        <aside className='min-h-screen bg-primary max-w-[25vw] lg:max-w-[20vw] w-full p-5 hidden md:block'>
             <nav className='mt-15'>
                 {SidebarData.map((s) => (
                     <NavLink

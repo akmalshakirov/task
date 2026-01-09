@@ -4,10 +4,11 @@ const Layout = lazy(() => import("./layout/index"));
 import CreateUser from "./pages/createUser";
 import EditUser from "./pages/userEdit";
 import Users from "./pages/users";
+import Loader from "./components/loader";
 
 function App() {
     return (
-        <Suspense fallback={<>Loading...</>}>
+        <Suspense fallback={<Loader />}>
             <Layout>
                 <Routes>
                     <Route path='/' element={<Users />} />
