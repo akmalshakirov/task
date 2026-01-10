@@ -2,7 +2,7 @@ import { Loader2Icon } from "lucide-react";
 
 const Loader = () => {
     return (
-        <div className='h-screen flex flex-col items-center gap-3 justify-center'>
+        <div className='h-dvh flex flex-col items-center gap-3 justify-center'>
             <Loader2Icon
                 className='animate-spin [animation-duration:0.5s]'
                 size={35}

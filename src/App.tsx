@@ -1,10 +1,10 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-const Layout = lazy(() => import("./layout/index"));
+import Loader from "./components/loader";
 import CreateUser from "./pages/createUser";
 import EditUser from "./pages/userEdit";
-import Users from "./pages/users";
-import Loader from "./components/loader";
+const Layout = lazy(() => import("./layout/index"));
+const Users = lazy(() => import("./pages/users"));
 
 function App() {
     return (

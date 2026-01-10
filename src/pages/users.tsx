@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import type { UserType } from "../types/userType";
 import Table from "../components/table";
 import { TableColumns } from "../data/sidebarData";
+import type { UserType } from "../types/userType";
 
 const Users = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -26,10 +26,18 @@ const Users = () => {
     }, []);
 
     if (loading) {
-        return <>Loading...</>;
+        return <>Fetching data...</>;
     }
 
-    return <Table data={data} columns={TableColumns} />;
+    return (
+        <div className='overflow-auto w-full'>
+            <Table
+                data={data}
+                columns={TableColumns}
+                actions={{ delete: true }}
+            />
+        </div>
+    );
 };
 
 export default Users;

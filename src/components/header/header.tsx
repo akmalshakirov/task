@@ -1,9 +1,30 @@
+import { NavLink } from "react-router-dom";
+import { SidebarData } from "../../data/sidebarData";
 import SidebarMobile from "../sidebar/sidebarMobile";
 
 const Header = () => {
     return (
-        <header className='w-full bg-primary p-5 flex items-center justify-between'>
-            Task example
+        <header className='w-full bg-primary p-5 py-2 flex items-center justify-between relative'>
+            <div className='flex items-center gap-5'>
+                <h2>Task example</h2>
+                <div className='items-center gap-5 hidden md:flex'>
+                    {SidebarData.map((s) => (
+                        <NavLink
+                            key={s.id}
+                            to={s.link}
+                            className={({ isActive }) =>
+                                `flex items-center gap-1 my-2 cursor-pointer px-2 py-2 rounded-lg text-white border transition ${
+                                    isActive
+                                        ? "bg-white/20 border-transparent"
+                                        : "border-gray-600 hover:bg-white/7"
+                                }`
+                            }>
+                            <span>{s.icon}</span>
+                            {s.label}
+                        </NavLink>
+                    ))}
+                </div>
+            </div>
             <SidebarMobile />
         </header>
     );
