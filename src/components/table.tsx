@@ -37,19 +37,17 @@ const Table = ({
                     <tr
                         key={item?.id ?? rowIdx}
                         className='hover:bg-white/7 transition even:bg-primary/30'>
-                        {columns.map((col) => {
-                            return (
-                                <td
-                                    key={col.key ?? rowIdx}
-                                    className='px-4 py-3 text-center text-sm text-gray-100 text-nowrap'>
-                                    {item[col.key] == item.username && "@"}
-                                    {item[col.key]}
-                                </td>
-                            );
-                        })}
+                        {columns.map((col) => (
+                            <td
+                                key={col.key ?? rowIdx}
+                                className='px-4 py-3 text-center text-sm text-gray-100 text-nowrap'>
+                                {item[col.key] == item.username && "@"}
+                                {item[col.key]}
+                            </td>
+                        ))}
 
                         {actions && (
-                            <td className='px-4 py-3 text-right'>
+                            <td className='px-4 py-3 text-center'>
                                 <div className='inline-flex items-center gap-2'>
                                     {actions?.delete && (
                                         <button

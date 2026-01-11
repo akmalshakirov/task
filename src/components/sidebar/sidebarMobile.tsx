@@ -1,7 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { SidebarData } from "../../data/sidebarData";
+import { SidebarData } from "../../data";
 import styles from "./sidebar.module.css";
 
 const SidebarMobile = () => {

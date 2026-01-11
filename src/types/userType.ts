@@ -20,3 +20,10 @@ export type TableActions = {
     edit?: boolean;
     info?: boolean;
 };
+
+export type FilterUsersBy =
+    | "username"
+    | "firstName"
+    | "lastName"
+    | "asc"
+    | "desc";
