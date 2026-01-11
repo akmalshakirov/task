@@ -16,3 +16,7 @@
 @theme {
     --color-primary: #262626;
 }
+
+html {
+    scrollbar-color: #ffffff80 #222;
+}
