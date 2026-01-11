@@ -24,7 +24,14 @@ const Users = () => {
 
             setData(data.users);
         } catch (error) {
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong!", {
+                style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                },
+                duration: 4444,
+            });
             console.log(error);
         } finally {
             setLoading(false);
@@ -43,7 +50,14 @@ const Users = () => {
 
             return data;
         } catch (error) {
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong!", {
+                style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                },
+                duration: 4444,
+            });
             console.log(error);
         }
     };
@@ -87,7 +101,14 @@ const Users = () => {
             setData(data.users);
             console.log(data.users);
         } catch (error) {
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong!", {
+                style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                },
+                duration: 4444,
+            });
             console.log(error);
         }
     };
@@ -106,7 +127,14 @@ const Users = () => {
 
             setData(data.users);
         } catch (error) {
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong!", {
+                style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                },
+                duration: 4444,
+            });
             console.log(error);
         }
     };

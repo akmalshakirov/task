@@ -55,7 +55,7 @@ const CreateUser = () => {
     return (
         <div className='flex items-center justify-center min-h-[calc(100vh-60px)] py-10'>
             <form
-                className='bg-primary p-4 sm:p-6 md:p-8 rounded-xl flex flex-col space-y-1 sm:space-y-5 sm:max-w-[500px] sm:w-full'
+                className='bg-primary p-4 sm:p-6 md:p-8 rounded-xl flex flex-col space-y-1 sm:space-y-5 w-[90%] sm:max-w-[500px] sm:w-full'
                 onSubmit={submit}>
                 <h2 className='text-lg font-semibold sm:text-2xl text-center mb-4'>
                     Create user
@@ -85,7 +85,7 @@ const CreateUser = () => {
                             }
                             name={data.key}
                             autoComplete='off'
-                            className='border-gray-600 border rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-blue-500 text-white bg-gray-500/20 transition ml-auto sm:w-2/3'
+                            className='border-gray-600 border rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-blue-500 text-white bg-gray-500/20 transition ml-auto sm:w-2/3 w-full'
                             autoFocus={index === 0}
                         />
                     </label>
