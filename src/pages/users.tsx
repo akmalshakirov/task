@@ -88,7 +88,7 @@ const Users = () => {
 
     return (
         <>
-            <div className='flex items-center justify-center gap-5 p-5 bg-primary mb-5 border-t border-t-gray-200/50'>
+            <div className='flex flex-wrap items-center justify-center gap-5 p-5 bg-primary mb-5 border-t border-t-gray-200/50'>
                 <label>
                     Fetch limit:{" "}
                     <select
