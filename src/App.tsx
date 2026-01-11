@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/loader";
 import CreateUser from "./pages/createUser";
-import EditUser from "./pages/userEdit";
+import EditUser from "./pages/userUpdate";
 const Layout = lazy(() => import("./layout/index"));
 const Users = lazy(() => import("./pages/users"));
 
@@ -15,7 +15,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Users />} />
                     <Route path='/create' element={<CreateUser />} />
-                    <Route path='/edit/:id' element={<EditUser />} />
+                    <Route path='/user/:id' element={<EditUser />} />
                 </Routes>
             </Layout>
         </Suspense>

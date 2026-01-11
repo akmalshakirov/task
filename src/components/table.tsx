@@ -1,4 +1,5 @@
-import { UserRoundMinus } from "lucide-react";
+import { UserRoundMinus, UserRoundPen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import type { TableActions, TableColumns, UserType } from "../types/userType";
 
 const Table = ({
@@ -12,6 +13,7 @@ const Table = ({
     actions?: TableActions;
     deleteFunc: (item: UserType) => void;
 }) => {
+    const navigate = useNavigate();
     return (
         <table className='w-full'>
             <thead className='bg-primary/50'>
@@ -47,32 +49,34 @@ const Table = ({
                         ))}
 
                         {actions && (
-                            <td className='px-4 py-3 text-center'>
-                                <div className='inline-flex items-center gap-2'>
-                                    {actions?.delete && (
-                                        <button
-                                            aria-label={`Delete user named ${item.firstName}`}
-                                            title={`Delete user named ${item.firstName}`}
-                                            className='bg-red-700/30 border border-red-700/70 rounded-lg p-2 cursor-pointer hover:bg-red-600/60 transition outline-none focus:ring-3 focus:ring-red-500/40'
-                                            onClick={() => deleteFunc(item)}>
-                                            <UserRoundMinus size={18} />
+                            <td className='px-4 py-3 flex justify-center items-center gap-2'>
+                                {actions?.edit && (
+                                    <button
+                                        aria-label={`Click to edit user ${item.firstName}`}
+                                        title={`Click to edit user ${item.firstName}`}
+                                        className='bg-primary border border-gray-500 rounded-lg p-2 cursor-pointer hover:bg-gray-700 transition outline-none focus:ring-3 focus:ring-blue-500/80'
+                                        onClick={() =>
+                                            navigate(`/user/${item.id}`)
+                                        }>
+                                        <UserRoundPen size={18} />
+                                    </button>
+                                )}
+                                {actions?.delete && (
+                                    <button
+                                        aria-label={`Delete user named ${item.firstName}`}
+                                        title={`Delete user named ${item.firstName}`}
+                                        className='bg-red-700/30 border border-red-700/70 rounded-lg p-2 cursor-pointer hover:bg-red-600/60 transition outline-none focus:ring-3 focus:ring-red-500/40'
+                                        onClick={() => deleteFunc(item)}>
+                                        <UserRoundMinus size={18} />
+                                    </button>
+                                )}
+                                {actions?.info && (
+                                    <td className='px-1.5 py-2 text-sm text-gray-300'>
+                                        <button className='border rounded-lg p-4 cursor-pointer hover:bg-primary'>
+                                            Info
                                         </button>
-                                    )}
-                                    {actions?.edit && (
-                                        <td className='px-1.5 py-2 text-sm text-gray-300'>
-                                            <button className='border rounded-lg p-4 cursor-pointer hover:bg-primary'>
-                                                Edit
-                                            </button>
-                                        </td>
-                                    )}
-                                    {actions?.info && (
-                                        <td className='px-1.5 py-2 text-sm text-gray-300'>
-                                            <button className='border rounded-lg p-4 cursor-pointer hover:bg-primary'>
-                                                Info
-                                            </button>
-                                        </td>
-                                    )}
-                                </div>
+                                    </td>
+                                )}
                             </td>
                         )}
                     </tr>

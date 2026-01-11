@@ -1,12 +1,18 @@
 import axios from "axios";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DefaultUserData } from "../data";
 import type { UserType } from "../types/userType";
 
-const CreateUser = () => {
-    const [newUserData, setNewUserData] = useState<Partial<UserType>>({
+const EditUser = () => {
+    const { id } = useParams();
+    const [loading, setLoading] = useState<boolean>(true);
+    const [status, setStatus] = useState<
+        "notfound" | "updated" | "default" | "pending"
+    >("default");
+    const navigate = useNavigate();
+    const [editingUser, setEditingUser] = useState<Partial<UserType | null>>({
         username: "",
         firstName: "",
         lastName: "",
@@ -15,19 +21,62 @@ const CreateUser = () => {
         phone: "",
         role: "",
     });
-    const [status, setStatus] = useState<"created" | "pending" | "default">(
-        "default"
-    );
-    const navigate = useNavigate();
+
+    const getUser = async () => {
+        try {
+            if (!id) return;
+            const { data } = await axios.get(
+                `https://dummyjson.com/users/${id}`
+            );
+            setEditingUser({
+                email: data.email,
+                firstName: data.firstName,
+                gender: data.gender,
+                lastName: data.lastName,
+                phone: data.phone,
+                role: data.role,
+                username: data.username,
+            });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error?.response?.status === 404) {
+                    return setStatus("notfound");
+                }
+                toast.error("Something went wrong!", {
+                    style: {
+                        borderRadius: "10px",
+                        background: "#333",
+                        color: "#fff",
+                    },
+                    duration: 4444,
+                });
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     const handleSubmit = async () => {
         try {
             setStatus("pending");
-            await axios.post(`https://dummyjson.com/users/add`, newUserData);
+            await axios.put(`https://dummyjson.com/users/${id}`, editingUser);
             navigate("/");
         } catch (error) {
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong!", {
+                style: {
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
+                },
+                duration: 4444,
+            });
             console.log(error);
+        } finally {
+            setStatus("updated");
         }
     };
 
@@ -37,9 +86,9 @@ const CreateUser = () => {
         toast.promise(
             handleSubmit,
             {
-                loading: "Sending...",
-                error: "Failed to create user!",
-                success: "User created successfully",
+                loading: "Editing...",
+                error: "Failed to updated user!",
+                success: "User updated successfully",
             },
             {
                 style: {
@@ -52,13 +101,28 @@ const CreateUser = () => {
         );
     };
 
+    if (loading) {
+        return (
+            <div className='flex items-center justify-center min-h-[calc(100vh-60px)]'>
+                <p className='text-2xl font-semibold'>Loading user's data...</p>
+            </div>
+        );
+    }
+    if (!loading && status === "notfound") {
+        return (
+            <div className='flex items-center justify-center min-h-[calc(100vh-60px)]'>
+                <h2 className='text-2xl font-semibold'>User not found!</h2>
+            </div>
+        );
+    }
+
     return (
         <div className='flex items-center justify-center min-h-[calc(100vh-60px)] py-10'>
             <form
                 className='bg-primary p-4 sm:p-6 md:p-8 rounded-xl flex flex-col space-y-1 sm:space-y-5 sm:max-w-[500px] sm:w-full'
                 onSubmit={submit}>
                 <h2 className='text-lg font-semibold sm:text-2xl text-center mb-4'>
-                    Create user
+                    Update the user's data
                 </h2>
                 {DefaultUserData.map((data, index) => (
                     <label
@@ -66,8 +130,8 @@ const CreateUser = () => {
                         key={data.key}>
                         {data.label}:{" "}
                         <input
-                            title={`Enter a ${data.label}`}
-                            aria-label={`Enter a ${data.label}`}
+                            title={`Edit user's ${data.label}`}
+                            aria-label={`Edit user's ${data.label}`}
                             type={
                                 data.key === "email"
                                     ? "email"
@@ -76,9 +140,9 @@ const CreateUser = () => {
                                     : "text"
                             }
                             required
-                            value={newUserData[data.key]}
+                            value={editingUser?.[data.key]}
                             onChange={(e) =>
-                                setNewUserData((prev) => ({
+                                setEditingUser((prev) => ({
                                     ...prev,
                                     [data.key]: e.target.value,
                                 }))
@@ -94,17 +158,17 @@ const CreateUser = () => {
                     Role:{" "}
                     <select
                         name='role'
-                        value={newUserData.role}
+                        value={editingUser?.role}
                         onChange={(e) =>
-                            setNewUserData((prev) => ({
+                            setEditingUser((prev) => ({
                                 ...prev,
                                 role: e.target.value,
                             }))
                         }
                         className='border-gray-600 border rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-blue-500 text-white open:text-black open:bg-gray-200 bg-gray-500/20 ml-auto w-full sm:w-2/3'
                         required
-                        title='Select role for new user'
-                        aria-label='Select role for new user'>
+                        title="Select to update user's role"
+                        aria-label="Select to update user's role">
                         <option value='user'>User</option>
                         <option value='admin'>Admin</option>
                         <option value='moderator'>Moderator</option>
@@ -114,17 +178,17 @@ const CreateUser = () => {
                     Gender:{" "}
                     <select
                         name='gender'
-                        value={newUserData.gender}
+                        value={editingUser?.gender}
                         onChange={(e) =>
-                            setNewUserData((prev) => ({
+                            setEditingUser((prev) => ({
                                 ...prev,
                                 gender: e.target.value,
                             }))
                         }
                         className='border-gray-600 border rounded-lg px-2 py-1 outline-none focus:ring-2 focus:ring-blue-500 text-white open:text-black open:bg-gray-200 bg-gray-500/20 ml-auto w-full sm:w-2/3'
                         required
-                        title='Select gender for new user'
-                        aria-label='Select gender for new user'>
+                        title="Select to update user's gender"
+                        aria-label="Select to update user's gender">
                         <option value='male'>Male</option>
                         <option value='female'>Female</option>
                     </select>
@@ -152,4 +216,4 @@ const CreateUser = () => {
     );
 };
 
-export default CreateUser;
+export default EditUser;

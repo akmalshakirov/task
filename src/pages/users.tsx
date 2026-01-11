@@ -163,14 +163,22 @@ const Users = () => {
             </div>
             <div className='overflow-auto w-full'>
                 {loading ? (
-                    <p className='text-center'>Fetching data...</p>
+                    <div className='flex items-center justify-center min-h-[70vh]'>
+                        <h2 className='text-2xl font-semibold'>
+                            Fetching data...
+                        </h2>
+                    </div>
                 ) : !loading && data?.length === 0 ? (
-                    <p className='text-center'>Users not found!</p>
+                    <div className='flex items-center justify-center min-h-[70vh]'>
+                        <h2 className='text-2xl font-semibold'>
+                            Users not found!
+                        </h2>
+                    </div>
                 ) : (
                     <Table
                         data={data}
                         columns={TableColumns}
-                        actions={{ delete: true }}
+                        actions={{ delete: true, edit: true }}
                         deleteFunc={handleDelete}
                     />
                 )}
