@@ -13,7 +13,7 @@ const Header = () => {
                             key={s.id}
                             to={s.link}
                             className={({ isActive }) =>
-                                `flex items-center gap-1 my-2 cursor-pointer px-2 py-2 rounded-lg text-white border transition ${
+                                `flex items-center gap-1 cursor-pointer px-2 py-2 rounded-lg text-white border transition ${
                                     isActive
                                         ? "bg-white/20 border-transparent"
                                         : "border-gray-600 hover:bg-white/7"
