@@ -7,6 +7,7 @@ import type { UserType } from "../types/userType";
 const Users = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<UserType[] | null>(null);
+    // const [deletingUser, setDeletingUser] = useState<UserType | null>(null);
 
     const getUsers = async () => {
         try {
@@ -25,6 +26,14 @@ const Users = () => {
         getUsers();
     }, []);
 
+    const deleteUser = async (item: UserType) => {
+        try {
+            confirm(
+                `Do you really want to delete this user ${item.firstName}?`
+            );
+        } catch (error) {}
+    };
+
     if (loading) {
         return <>Fetching data...</>;
     }
@@ -35,6 +44,7 @@ const Users = () => {
                 data={data}
                 columns={TableColumns}
                 actions={{ delete: true }}
+                deleteFunc={deleteUser}
             />
         </div>
     );
