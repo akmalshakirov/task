@@ -3,10 +3,10 @@ import Header from "../components/header/header";
 
 const Layout = ({ children }: { children?: React.ReactNode }) => {
     return (
-        <main className='min-h-screen flex bg-neutral-950'>
-            <div className='flex flex-col w-full'>
+        <main className='min-h-screen bg-neutral-950'>
+            <div className='relative'>
                 <Header />
-                <div className='p-5'>{children}</div>
+                <div>{children}</div>
             </div>
         </main>
     );

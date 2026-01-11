@@ -4,7 +4,7 @@ import SidebarMobile from "../sidebar/sidebarMobile";
 
 const Header = () => {
     return (
-        <header className='w-full bg-primary p-5 py-2 flex items-center justify-between relative'>
+        <header className='sticky top-0 left-0 bg-primary p-5 py-2 flex items-center justify-between'>
             <div className='flex items-center gap-5'>
                 <h2>Task example</h2>
                 <div className='items-center gap-5 hidden md:flex'>
