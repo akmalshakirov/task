@@ -24,6 +24,7 @@ const Users = () => {
 
             setData(data.users);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         } finally {
             setLoading(false);
@@ -42,6 +43,7 @@ const Users = () => {
 
             return data;
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     };
@@ -85,6 +87,7 @@ const Users = () => {
             setData(data.users);
             console.log(data.users);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     };
@@ -97,11 +100,13 @@ const Users = () => {
                     ...(e.target.value == "desc" || e.target.value == "asc"
                         ? { order: e.target.value }
                         : { sortBy: e.target.value }),
+                    limit: limit,
                 },
             });
 
             setData(data.users);
         } catch (error) {
+            toast.error("Something went wrong!");
             console.log(error);
         }
     };

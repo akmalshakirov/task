@@ -50,3 +50,11 @@ export const TableColumns = [
         header: "Role",
     },
 ];
+
+export const DefaultUserData = [
+    { key: "username", label: "Username" },
+    { key: "firstName", label: "Fist name" },
+    { key: "lastName", label: "Last name" },
+    { key: "phone", label: "Phone" },
+    { key: "email", label: "Email" },
+];
